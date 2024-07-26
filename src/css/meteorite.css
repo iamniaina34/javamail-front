@@ -1,0 +1,62 @@
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+.meteorite {
+    position: absolute;
+    background: radial-gradient(circle, #ff6b6b, #f06595);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear;
+}
+
+.meteorite:nth-child(1) {
+    animation-duration: 2s;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.meteorite:nth-child(2) {
+    animation-duration: 3s;
+    left: 30%;
+    animation-delay: 0.5s;
+}
+
+.meteorite:nth-child(3) {
+    animation-duration: 2.5s;
+    left: 50%;
+    animation-delay: 1s;
+}
+
+.meteorite:nth-child(4) {
+    animation-duration: 4s;
+    left: 70%;
+    animation-delay: 1.5s;
+}
+
+.meteorite:nth-child(5) {
+    animation-duration: 2.8s;
+    left: 90%;
+    animation-delay: 2s;
+}
+
+.meteorite:nth-child(6) {
+    animation-duration: 3.5s;
+    left: 20%;
+    animation-delay: 2.5s;
+}
+
+.meteorite:nth-child(7) {
+    animation-duration: 3s;
+    left: 60%;
+    animation-delay: 3s;
+}

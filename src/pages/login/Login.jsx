@@ -1,7 +1,7 @@
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import { Box, Button, Container, createTheme, Divider, FormControl, IconButton, InputAdornment, Link, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import AppTitle from '../../components/AppTitle'
 import { useCookies } from 'react-cookie'
 import { Logger } from '../../api/entities'
@@ -49,7 +49,7 @@ function Login() {
     navigate('/reinitialiser')
   }
 
-  return (
+  return cookies.usernameCookie ? (<Navigate to={'/acceuil'} />) : (
     <Container
       maxWidth='lg'
       sx={{
