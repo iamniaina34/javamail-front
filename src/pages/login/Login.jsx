@@ -3,42 +3,57 @@ import { Box, Button, Container, createTheme, Divider, FormControl, IconButton, 
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AppTitle from '../../components/AppTitle'
+import { useCookies } from 'react-cookie'
+import { Logger } from '../../api/entities'
 
 function Login() {
-  const [pseudo, setPseudo] = useState('')
-  const [motDePasse, setMotDePasse] = useState('')
-  const [voirMotDePasse, setVoirMotDePasse] = useState(false)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [isInvalid, setInvalid] = useState(false)
   const navigate = useNavigate()
   const theme = createTheme()
+  const [cookies, setCookie] = useCookies(['usernameCookie'])
 
   const handlePseudoChange = (e) => {
     const v = e.target.value
-    setPseudo(v)
+    setUsername(v)
   }
 
   const handleMotDePasseChange = (e) => {
     const v = e.target.value
-    setMotDePasse(v)
+    setPassword(v)
   }
 
   const handleVoirMotDePasseChange = () => {
-    setVoirMotDePasse((oldVoirMotDePasse) => (!oldVoirMotDePasse))
+    setShowPassword((oldVoirMotDePasse) => (!oldVoirMotDePasse))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(pseudo, motDePasse)
+    setInvalid(false)
+    const token = await Logger.post({ username, password })
+      .then(r => { return r.data })
+      .catch(e => { setInvalid(true) })
+    if (!!token) {
+      setCookie('usernameCookie', btoa(token), { path: '/' })
+      navigate('/acceuil')
+    }
   }
 
   const redirectToRegisterPage = (e) => {
     navigate('/creer')
   }
 
+  const redirectToResetPage = (e) => {
+    navigate('/reinitialiser')
+  }
+
   return (
     <Container
       maxWidth='lg'
       sx={{
-        height: '100vh',
+        height: '100%',
         m: 'auto',
         display: 'flex',
         flexDirection: 'row',
@@ -112,6 +127,22 @@ function Login() {
               Se connecter
             </Typography>
           </Box>
+          {isInvalid && (
+            <Box
+              py={1}
+              border={'1px solid'}
+              borderColor={'error.main'}
+              borderRadius={1}
+            >
+              <Typography
+                variant='subtitle2'
+                align='center'
+                color={'error'}
+              >
+                Identifiant ou Mot de passe invalide
+              </Typography>
+            </Box>
+          )}
           <Box
             display={'flex'}
             flexDirection={'column'}
@@ -119,12 +150,13 @@ function Login() {
           >
             <FormControl>
               <TextField
-                value={pseudo}
+                value={username}
                 onChange={handlePseudoChange}
                 variant='outlined'
                 size='small'
                 label='Identifiant'
                 placeholder='JamesBond'
+                error={isInvalid}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -132,13 +164,14 @@ function Login() {
             </FormControl>
             <FormControl>
               <TextField
-                type={voirMotDePasse ? 'text' : 'password'}
-                value={motDePasse}
+                type={showPassword ? 'text' : 'password'}
+                value={password}
                 onChange={handleMotDePasseChange}
                 variant='outlined'
                 size='small'
                 label='Mot de passe'
                 placeholder={"\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF\u25CF"}
+                error={isInvalid}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -146,14 +179,14 @@ function Login() {
                         edge='end'
                         disableFocusRipple
                         disableTouchRipple
-                        disabled={!motDePasse.length > 0}
+                        disabled={!password.length > 0}
                         onClick={handleVoirMotDePasseChange}
                         sx={{
                           borderRadius: '4px'
                         }}
                       >
-                        <Visibility sx={{ display: voirMotDePasse ? 'none' : 'block' }} />
-                        <VisibilityOff sx={{ display: voirMotDePasse ? 'block' : 'none' }} />
+                        <Visibility sx={{ display: showPassword ? 'none' : 'block' }} />
+                        <VisibilityOff sx={{ display: showPassword ? 'block' : 'none' }} />
                       </IconButton>
                     </InputAdornment>
                   ),

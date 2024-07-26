@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import React from 'react'
 
-function AppTitle({ filled = false, disableGutter = false }) {
+function AppTitle({ filled = false, disableGutter = false, size = 'normal' }) {
     return (
         <Box
             bgcolor={filled ? 'primary.main' : ''}
@@ -16,7 +16,7 @@ function AppTitle({ filled = false, disableGutter = false }) {
             }}
         >
             <Typography
-                variant='h1'
+                variant={size === 'small' ? 'h2' : 'h1'}
                 fontWeight={700}
                 color={filled ? 'whitesmoke' : 'primary'}
 
@@ -26,6 +26,7 @@ function AppTitle({ filled = false, disableGutter = false }) {
             <Box flex flexDirection='column'>
                 <Typography
                     variant='h4'
+                    fontSize={size === 'small' ? '22px' : 'normal'}
                     fontWeight={700}
                     color={filled ? 'whitesmoke' : 'primary'}
                 >
@@ -33,6 +34,7 @@ function AppTitle({ filled = false, disableGutter = false }) {
                 </Typography>
                 <Typography
                     variant='h4'
+                    fontSize={size === 'small' ? '22px' : 'normal'}
                     fontWeight={700}
                     color={filled ? 'whitesmoke' : 'primary'}
                 >

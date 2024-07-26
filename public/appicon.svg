@@ -1,0 +1,41 @@
+<svg
+    width="200"
+    height="60"
+    viewBox="0 0 200 60"
+    xmlns="http://www.w3.org/2000/svg"
+    style="border-radius: 12px;"
+>
+    <!-- Background Box -->
+    <rect
+        width="200"
+        height="60"
+        rx="12"
+        fill="{fillColor}"
+    />
+
+    <!-- T Character -->
+    <text
+        x="16"
+        y="40"
+        font-family="Roboto, sans-serif"
+        font-size="32"
+        font-weight="700"
+        fill="{textColor}"
+    >
+        T
+    </text>
+
+    <!-- Tiny and Asker Group -->
+    <g
+        transform="translate(40, 8)"
+        font-family="Roboto, sans-serif"
+        font-size="24"
+        font-weight="700"
+        fill="{textColor}"
+    >
+        <!-- Tiny -->
+        <text x="0" y="24">iny</text>
+        <!-- Asker -->
+        <text x="0" y="48">asker</text>
+    </g>
+</svg>

@@ -1,4 +1,4 @@
-import { Box, Button, Container, createTheme, Divider, FormControl, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, createTheme, FormControl, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,6 +10,7 @@ function Register() {
     email: '',
     motDePasse: ''
   })
+  const [isEmailValid, setIsEmailValid] = useState(true)
 
   const handleAccountChange = (e) => {
     const p = e.target.id
@@ -106,6 +107,13 @@ function Register() {
                 size='small'
                 label='Email'
                 placeholder='abc@oij.xyz'
+                error={!isEmailValid}
+                helperText={!isEmailValid && 'Cet email est déjà assigné à un autre compte'}
+                FormHelperTextProps={{
+                  sx: {
+                    mx: 0
+                  }
+                }}
                 InputLabelProps={{
                   shrink: true,
                 }}
