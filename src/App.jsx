@@ -7,7 +7,7 @@ import Reset from './pages/reset/Reset';
 import { AppBar, Box, CssBaseline, Divider, Link, Toolbar, Typography } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import Root from './pages/root/Root';
-import { darkTheme } from './themes/theme';
+import { darkTheme, defaultTheme } from './themes/theme';
 import AppTitle from './components/AppTitle';
 import CustomSwitch from './components/CustomSwitch';
 import AuthGuard from './utilities/middleware/AuthGuard';
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <Box display={'flex'} flexDirection={'column'} height={'100vh'} overflow={'hidden'}>
           <AppBar color='transparent' position="sticky" elevation={0}>

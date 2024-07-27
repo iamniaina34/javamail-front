@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { TextField, Box } from '@mui/material'
 
-export default function OTPField({ length = 6, onChange = () => { } }) {
+export default function OTPField({ length = 6, error = { value: false, index: 0 }, onChange = () => { } }) {
     const [otp, setOtp] = useState(Array(length).fill(''))
     const inputs = useRef([])
 
@@ -49,15 +49,16 @@ export default function OTPField({ length = 6, onChange = () => { } }) {
                 <TextField
                     key={index}
                     value={digit}
+                    error={error.value && error.index <= index}
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
                     onPaste={handlePaste}
                     inputProps={{
                         maxLength: 1,
-                        style: { 
+                        style: {
                             textAlign: 'center',
                             fontWeight: 700
-                         }
+                        }
                     }}
                     inputRef={(ref) => (inputs.current[index] = ref)}
                     variant='outlined'
