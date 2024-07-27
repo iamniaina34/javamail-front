@@ -22,119 +22,87 @@ function Reset() {
   }
 
   return (
-    <Container
-      maxWidth='lg'
+    <Box
+      component={'form'}
+      method='post'
+      onSubmit={handleSubmit}
       sx={{
-        height: '100vh',
-        m: 'auto',
+        minWidth: '324px',
+        maxWidth: '360px',
+        my: 2,
+        px: '20px',
         display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        [theme.breakpoints.down('sm')]: {
-          height: 'fit-content',
-          my: 4,
-        }
+        flexDirection: 'column',
+        gap: 4,
       }}
     >
-      <Box
-        sx={{
-          m: 'auto',
-          width: 'fit-content',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          gap: 4,
-          p: 1,
-          [theme.breakpoints.up('lg')]: {
-            borderColor: 'InactiveBorder',
-            borderRadius: 4,
-          },
-        }}
-      >
-        <Box
-          component={'form'}
-          method='post'
-          onSubmit={handleSubmit}
-          sx={{
-            minWidth: '324px',
-            maxWidth: '360px',
-            my: 2,
-            px: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 4,
-          }}
+      <Box>
+        <Typography
+          variant='h4'
+          noWrap
+          fontWeight={600}
+          align='center'
+          color='primary'
+          gutterBottom
         >
-          <Box>
-            <Typography
-              variant='h4'
-              noWrap
-              fontWeight={600}
-              align='center'
-              color='primary'
-              gutterBottom
-            >
-              Recupération
-            </Typography>
-            <Typography
-              variant='body2'
-              align='justify'
-            >
-              Veuiller nous fournir votre email afin de pouvoir recuperer votre compte.
-            </Typography>
-          </Box>
-          <Box>
-            <FormControl fullWidth>
-              <TextField
-                type='email'
-                value={email}
-                onChange={handleEmailChange}
-                variant='outlined'
-                size='small'
-                label='Email'
-                placeholder='abc@oij.xyz'
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </FormControl>
-          </Box>
-          <Box
-            display={'flex'}
-            flexDirection={'column'}
-            gap={2}
-          >
-            <Button
-              type='submit'
-              variant='contained'
-              fullWidth
-              disableElevation
-            >
-              <Typography
-                variant='button'
-                fontWeight={700}
-              >
-                Confirmer
-              </Typography>
-            </Button>
-            <Divider />
-            <Button
-              fullWidth
-              variant='outlined'
-              onClick={(e) => handleCancel(e)}
-            >
-              <Typography
-                variant='button'
-                fontWeight={700}
-              >
-                Annuler
-              </Typography>
-            </Button>
-          </Box>
-        </Box>
+          Recupération
+        </Typography>
+        <Typography
+          variant='body2'
+          align='justify'
+        >
+          Veuiller nous fournir votre email afin de pouvoir recuperer votre compte.
+        </Typography>
       </Box>
-    </Container>
+      <Box>
+        <FormControl fullWidth>
+          <TextField
+            type='email'
+            value={email}
+            onChange={handleEmailChange}
+            variant='outlined'
+            size='small'
+            label='Email'
+            placeholder='abc@oij.xyz'
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        </FormControl>
+      </Box>
+      <Box
+        display={'flex'}
+        flexDirection={'column'}
+        gap={2}
+      >
+        <Button
+          type='submit'
+          variant='contained'
+          fullWidth
+          disableElevation
+        >
+          <Typography
+            variant='button'
+            fontWeight={700}
+          >
+            Confirmer
+          </Typography>
+        </Button>
+        <Divider />
+        <Button
+          fullWidth
+          variant='outlined'
+          onClick={(e) => handleCancel(e)}
+        >
+          <Typography
+            variant='button'
+            fontWeight={700}
+          >
+            Annuler
+          </Typography>
+        </Button>
+      </Box>
+    </Box>
   )
 }
 

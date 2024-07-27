@@ -4,7 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 function AuthGuard() {
   const [cookies] = useCookies(['usernameCookie']);
-  const isAuthenticated = cookies.usernameCookie != null;
+  const isAuthenticated = !!cookies.usernameCookie;
   return isAuthenticated ? <Outlet /> : <Navigate to='/connecter' />;
 }
 
