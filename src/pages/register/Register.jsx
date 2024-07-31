@@ -34,7 +34,7 @@ function Register() {
   const [pinCode, setPinCode] = useState('')
   const [pinCodeError, setPinCodeError] = useState({ value: false, index: 0 })
   const [showPassword, setShowPassword] = useState(false)
-  const [cookies, setCookie] = useCookies(['usernameCookie'])
+  const [cookies, setCookie] = useCookies(['userId'])
   const [step, setStep] = useState(1);
   const handleAccountChange = (e) => {
     const p = e.target.id;
@@ -148,7 +148,7 @@ function Register() {
     } else {
       Registerer.post(user)
         .then(r => {
-          setCookie('usernameCookie', btoa(user.username))
+          setCookie('userId', btoa(user.id))
         })
         .then(r => {
           navigate('/')

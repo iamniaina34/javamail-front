@@ -13,7 +13,7 @@ function Login() {
   const [isInvalid, setInvalid] = useState(false)
   const navigate = useNavigate()
   const theme = createTheme()
-  const [cookies, setCookie] = useCookies(['usernameCookie'])
+  const [cookies, setCookie] = useCookies(['userId'])
 
   const handlePseudoChange = (e) => {
     const v = e.target.value
@@ -36,7 +36,7 @@ function Login() {
       .then(r => { return r.data })
       .catch(e => { setInvalid(true) })
     if (!!token) {
-      setCookie('usernameCookie', btoa(token), { path: '/' })
+      setCookie('userId', btoa(token.id), { path: '/' })
       navigate('/acceuil')
     }
   }
@@ -49,7 +49,7 @@ function Login() {
     navigate('/reinitialiser')
   }
 
-  return cookies.usernameCookie ? (<Navigate to={'/acceuil'} />) : (
+  return cookies.userId ? (<Navigate to={'/acceuil'} />) : (
     <Box
       component={'form'}
       method='post'

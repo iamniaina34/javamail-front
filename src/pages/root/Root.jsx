@@ -5,6 +5,12 @@ function redirectToHomePage() {
     window.location.href = "/acceuil"
 }
 
+function redirectToLoginPage() {
+    window.location.href = "/connecter"
+}
+
 export default function Root() {
-    redirectToHomePage()
+    const [cookies, setCookie] = useCookies(['userId'])
+    if (!!cookies.userId) redirectToHomePage()
+    else redirectToLoginPage()
 }

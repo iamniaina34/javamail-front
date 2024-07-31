@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import '../../css/minimalPulse.css';
 import { useCookies } from 'react-cookie';
+import { User } from '../../api/entities';
 
 const generatePulses = (count) => {
     return Array.from({ length: count }, (_, index) => {
@@ -28,15 +29,21 @@ const generatePulses = (count) => {
 
 function Home() {
 
-    const [cookies, setCookie, removeCookie] = useCookies(['usernameCookie'])
+    const [cookies, setCookie, removeCookie] = useCookies(['userId'])
+    const [user, setUser] = useState({})
 
     const handleLogout = () => {
-        const username = atob(cookies.usernameCookie)
-
-        if (!!username) {
-            removeCookie('usernameCookie')
+        const userId = atob(cookies.userId)
+        if (!!userId) {
+            removeCookie('userId')
         }
     }
+
+    useEffect(() => {
+        User.get(atob(cookies.userId))
+            .then(r => setUser(r.data))
+            .catch(e => console.log(e))
+    }, [])
 
     return (
         <Box
@@ -53,7 +60,7 @@ function Home() {
                 letterSpacing={8}
                 fontSize={32}
             >
-                {`Bonjour, ${atob(cookies.usernameCookie)}!`}
+                {`Bonjour, ${user.username}!`}
             </Typography>
             <Button
                 variant='text'
