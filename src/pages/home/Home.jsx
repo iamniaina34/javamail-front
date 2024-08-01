@@ -41,7 +41,9 @@ function Home() {
 
     useEffect(() => {
         User.get(atob(cookies.userId))
-            .then(r => setUser(r.data))
+            .then(r => {
+                setUser(r.data)
+            })
             .catch(e => console.log(e))
     }, [])
 
@@ -55,12 +57,13 @@ function Home() {
             gap={2}
         >
             <Typography
+                align='center'
                 variant='button'
                 fontWeight={700}
                 letterSpacing={8}
                 fontSize={32}
             >
-                {`Bonjour, ${user.username}!`}
+                {`Bonjour${user.username ? `, ${user.username}` : ''}!`}
             </Typography>
             <Button
                 variant='text'

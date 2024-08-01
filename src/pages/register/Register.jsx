@@ -148,7 +148,8 @@ function Register() {
     } else {
       Registerer.post(user)
         .then(r => {
-          setCookie('userId', btoa(user.id))
+          console.log(user)
+          setCookie('userId', btoa(r.data.id))
         })
         .then(r => {
           navigate('/')
